@@ -175,3 +175,8 @@ body {
     display: none;
 }
 
+@media (max-width: 576px) {
+    .dashboard {
+        flex-direction: column;
+    }
+}
