@@ -30,8 +30,23 @@
             <h2>Available Jobs</h2>
             <span id="tabCount">0 jobs</span>
         </div>
+        <div class="tabs">
+            <button class="tab active" data-tab="all">All</button>
+            <button class="tab" data-tab="interview">Interview</button>
+            <button class="tab" data-tab="rejected">Rejected</button>
+        </div>
+
+        <div id="jobsContainer" class="jobs-container"></div>
+
+        <div id="emptyState" class="empty-state hidden">
+            <div class="empty-icon">📂</div>
+            <h3>No jobs available</h3>
+            <p>Please check another tab</p>
+        </div>
+
     </div>
 
+    <script src="tracker.js"></script>
     
 </body>
 </html>
