@@ -143,3 +143,31 @@ function setStatus(id, status) {
     renderJobs();
 }
 
+function deleteJob(id) {
+    const index =jobs.findIndex(j => j.id === id);
+    jobs.splice(index, 1);
+    renderJobs();
+}
+
+
+function updateDashboard() {
+    document.getElementById("totalCount").textContent = jobs.length;
+    document.getElementById("interviewCount").textContent =
+        jobs.filter(j => j.status === "interview").length;
+    document.getElementById("rejectedCount").textContent =
+        jobs.filter(j => j.status === "rejected").length;
+}
+
+document.querySelectorAll(".tab").forEach(tab => {
+    tab.addEventListener("click", function () {
+        document.querySelectorAll(".tab").forEach(t =>
+            t.classList.remove("active")
+        );
+        this.classList.add("active");
+        currentTab = this.dataset.tab;
+        renderJobs();
+    });
+});
+
+renderJobs();
+
