@@ -80,3 +80,66 @@ const jobs = [
         status: "all"
     }
 ];
+
+let currrentTab = "all";
+
+const jobsContainer = document.getElementById("jobsContainer");
+const emptyState = document.getElementById("emptyState");
+
+function renderJobs() {
+    jobsContainer.innerHTML ="";
+
+    const filtered = jobs.filter(job =>
+        currrentTab === "all" ? true : job.status === currrentTab
+    );
+
+    document.getElementById("tabCount").textContent =
+         filtered.length + "jobs";
+
+    if (filtered.length === 0) {
+        emptyState.classList.remove("hidden");
+    }  else {
+        emptyState.classList.add("hidden");
+    }  
+
+    filtered.forEach(job => {
+        const card = document.createElement("div");
+        card.className = "job-card";
+
+        card.innerHTML = `
+            <button class="delete-btn" onclick="deleteJob(${job.id})">🗑</button>
+
+            <div class="company">${job.company}</div>
+            <div class="position">${job.position}</div>
+            <div class="meta">${job.location} • ${job.type} • ${job.salary}</div>
+
+            <div class="status ${job.status}">
+                ${job.status === "all" ? "NOT APPLIED" : job.status.toUpperCase()}
+            </div>
+
+            <p>${job.description}</p>
+
+            <div class="actions">
+                <button class="btn btn-interview"
+                    onclick="setStatus(${job.id}, 'interview')">
+                    INTERVIEW
+                </button>
+                <button class="btn btn-rejected"
+                    onclick="setStatus(${job.id}, 'rejected')">
+                    REJECTED
+                </button>
+            </div>
+        `;
+
+        jobsContainer.appendChild(card);
+    });
+
+    updateDashboard();
+}
+
+function setStatus(id, status) {
+    const job = jobs.find(j => j.id === id);
+    job.status = job.status === status ? "all" : status;
+    renderJobs();
+}
+
