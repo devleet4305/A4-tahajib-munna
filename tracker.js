@@ -50,7 +50,7 @@ const jobs = [
         status: "all"
     },
     {
-          id: 6,
+        id: 6,
         company: "DataViz",
         position: "Data Specialist",
         location: "Boston",
@@ -81,26 +81,26 @@ const jobs = [
     }
 ];
 
-let currrentTab = "all";
+let currentTab = "all";
 
 const jobsContainer = document.getElementById("jobsContainer");
 const emptyState = document.getElementById("emptyState");
 
 function renderJobs() {
-    jobsContainer.innerHTML ="";
+    jobsContainer.innerHTML = "";
 
     const filtered = jobs.filter(job =>
-        currrentTab === "all" ? true : job.status === currrentTab
+        currentTab === "all" ? true : job.status === currentTab
     );
 
     document.getElementById("tabCount").textContent =
-         filtered.length + "jobs";
+        filtered.length + " jobs";
 
     if (filtered.length === 0) {
         emptyState.classList.remove("hidden");
-    }  else {
+    } else {
         emptyState.classList.add("hidden");
-    }  
+    }
 
     filtered.forEach(job => {
         const card = document.createElement("div");
@@ -144,11 +144,10 @@ function setStatus(id, status) {
 }
 
 function deleteJob(id) {
-    const index =jobs.findIndex(j => j.id === id);
+    const index = jobs.findIndex(j => j.id === id);
     jobs.splice(index, 1);
     renderJobs();
 }
-
 
 function updateDashboard() {
     document.getElementById("totalCount").textContent = jobs.length;
@@ -170,4 +169,3 @@ document.querySelectorAll(".tab").forEach(tab => {
 });
 
 renderJobs();
-
